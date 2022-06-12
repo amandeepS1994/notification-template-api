@@ -29,11 +29,11 @@ public class SMSTemplateServiceImplementation implements SMSTemplateService{
     }
 
     private String retrieveViewBalanceSMSType (Map<String, String> viewBalanceProperties) {
-        if (Objects.nonNull(viewBalanceProperties) && viewBalanceProperties.containsKey("name") && viewBalanceProperties.containsKey("account")) {
+        if (Objects.nonNull(viewBalanceProperties) && viewBalanceProperties.containsKey("name") && viewBalanceProperties.containsKey("account")  && viewBalanceProperties.containsKey("balance")) {
             return new StringBuilder()
                 .append(String.format("Hello %s %n", viewBalanceProperties.get("name")))
-                .append("Welcome to Citizen Bank %n %n")
-                .append(String.format("Your balance for the account number ending with %s is balance as of £124,00 as of %s %n %n", viewBalanceProperties.get("account"), new SimpleDateFormat("dd/mm/yyyy").format(new Date())))
+                .append("Welcome to Citizen Bank \n \n")
+                .append(String.format("Your balance for the account number ending with %s is balance as of %s as of %s %n %n", viewBalanceProperties.get("account"), viewBalanceProperties.get("balance"), new SimpleDateFormat("dd/mm/yyyy").format(new Date())))
                 .append("You can login to internet banking channel to view more details on the account \n \n")
                 .append("Regards, \n")
                 .append("Citizen Bank \n")

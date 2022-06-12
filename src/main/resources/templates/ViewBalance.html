@@ -21,7 +21,7 @@
 
 <p th:text="${'Welcome to Citizen Bank'}"></p>
 </p>
-<p th:text="${'Your balance for the account number ending with '+ accountnumber+' is '+ balance+' as of ' + #dates.format(#dates.createNow(), 'dd MMM yyyy HH:mm')}"></p>
+<p th:text="${'Your balance for the account number ending with '+ account +' is '+ balance +' as of ' + #dates.format(#dates.createNow(), 'dd MMM yyyy HH:mm')}"></p>
 <p>
   You can login to internet banking channel to view more details on the account</p>
 <p>
