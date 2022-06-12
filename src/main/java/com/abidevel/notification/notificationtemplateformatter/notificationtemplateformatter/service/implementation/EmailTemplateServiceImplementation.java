@@ -55,7 +55,7 @@ private Optional<String> contentMessage (TemplateType templateType, Context cont
     }
 
     if (templateType.equals(TemplateType.VIEWBALANCE)) {
-        return Optional.of(templateEngine.process(this.loadTemplateFiles.getViewBalance().getURI().getPath(), context));
+        return Optional.of(templateEngine.process(this.loadTemplateFiles.getViewBalance().getFilename(), context));
     }
     return Optional.empty();
 }

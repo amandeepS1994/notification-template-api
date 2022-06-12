@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import com.abidevel.notification.notificationtemplateformatter.notificationtemplateformatter.model.NotificationResponse;
 import com.abidevel.notification.notificationtemplateformatter.notificationtemplateformatter.model.enumeration.NotificationType;
+import com.abidevel.notification.notificationtemplateformatter.notificationtemplateformatter.model.enumeration.TemplateType;
 import com.abidevel.notification.notificationtemplateformatter.notificationtemplateformatter.model.request.NotificationRequest;
 import com.abidevel.notification.notificationtemplateformatter.notificationtemplateformatter.model.response.ApiResponse;
 import com.abidevel.notification.notificationtemplateformatter.notificationtemplateformatter.service.EmailTemplateService;
@@ -12,6 +13,7 @@ import com.abidevel.notification.notificationtemplateformatter.notificationtempl
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,13 +33,14 @@ public class TemplateController {
 
 
 
-    @GetMapping()
+    @PostMapping()
     public ResponseEntity<ApiResponse<NotificationResponse>> retrieveCommunicationTemplate(@RequestBody NotificationRequest notificationRequest) {
         if (notificationRequest.getNotificationMode().equals(NotificationType.EMAIL)) {
             Optional<String> emailContent = emailTemplateService.prepareEmailTemplate(notificationRequest);
             if (emailContent.isPresent()) {
                 return new ResponseEntity<>(new ApiResponse<>(true, NotificationResponse.builder()
                 .emailContent(emailContent.get())
+                .emailSubject(notificationRequest.getNotificationTemplateName().equals(TemplateType.VIEWBALANCE) ? "Balance" : "Phone Number Changed.")
                 .build()), HttpStatus.ACCEPTED);
             }
         }
